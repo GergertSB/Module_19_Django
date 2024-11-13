@@ -1,0 +1,21 @@
+{% extends "one_task/menu.html" %}
+
+{% block pagename %}
+    <h1> Игры </h1>
+{% endblock %}
+
+{% block menu %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    {% for i in game %}
+        <ul>
+        <h3>Название игры: {{ i.title|title }}</h3>
+            <p> Размер Мб: {{ i.size }}</p>
+          <p> Цена: {{ i.cost}} </p>
+        <button>Купить</button>
+
+        </ul>
+    {% endfor %}
+{% endblock %}
