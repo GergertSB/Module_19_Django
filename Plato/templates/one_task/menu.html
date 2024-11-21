@@ -1,18 +1,21 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+{% block pagename %}
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
+    <link rel="stylesheet" href = '{% static "css/border.css" %}'>
+    <title>Главная</title>
 </head>
 <body>
-
-{% block pagename %}
     <h1> Главная страница </h1>
 {% endblock %}
 
-<nav></nav>
+
 {% block menu %}
+<link rel="stylesheet" href = '{% static "css/main_menu.css" %}'>
+<div class="main_menu">
     <p>
         <a href="/"> Главная </a>
     </p>
@@ -25,8 +28,10 @@
     <p>
 
     </p>
+</div>
+
 {% endblock %}
-</nav>
+
 <main>
 {% block content %}
 {% endblock %}

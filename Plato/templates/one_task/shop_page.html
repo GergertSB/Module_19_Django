@@ -1,6 +1,8 @@
 {% extends "one_task/menu.html" %}
+{% load static %}
 
 {% block pagename %}
+<title xmlns="http://www.w3.org/1999/html">Магазин</title>
     <h1> Игры </h1>
 {% endblock %}
 
@@ -9,13 +11,75 @@
 {% endblock %}
 
 {% block content %}
-    {% for i in game %}
-        <ul>
-        <h3>Название игры: {{ i.title|title }}</h3>
-            <p> Размер Мб: {{ i.size }}</p>
-          <p> Цена: {{ i.cost}} </p>
-        <button>Купить</button>
+<section>
 
-        </ul>
+    {% for game in page_obj %}
+
+    <hr color="#3205F3">
+    <table border="0">
+        <tr><td width="400">
+            <h3>Название игры: {{game.title|title }}</h3>
+            <p> Размер Мб: {{ game.size }}</p>
+            <p> Цена: {{game.cost}} </p>
+
+
+            </td>
+            <td width="400">
+
+            <img src="/static/image/{{game.id}}.png" height="200" alt="Картинка из игры" >
+            </td>
+            </tr>
+        <tr><td><button>Купить</button></td></tr>
+    </table>
+</section>
     {% endfor %}
+<hr color="#3205F3">
+
+<table>
+    <tr>
+    <td>
+<form method="GET">
+    <label for="per-page">Показывать на странице:</label>
+
+    <select id="per-page" name="per_page">
+        <option value="1" {% if per_page == 1 %}selected{% endif %}>1</option>
+        <option value="3" {% if per_page == 3 %}selected{% endif %}>3</option>
+        <option value="5" {% if per_page == 5 %}selected{% endif %}>5</option>
+    </select>
+    <button type="submit">Применить</button>
+</form>
+    </td>
+    <tr><td>
+        <ul class="main__paginator">
+{% if page_obj.has_other_pages %}
+    <nav aria-label="Page navigation">
+<link rel="stylesheet" href = '{% static "css/main__paginator.css" %}'>
+    {% if page_obj.has_previous %}
+            <a class='paginator__left' href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                 Назад
+            </a>
+    {% else %}
+            <a class='paginator__left' href="#" aria-label="Previous">
+                 Назад
+            </a>
+    {% endif %}
+
+    {% for i in page_obj.paginator.page_range %}
+        {% if page_obj.number == i %}
+                <a class="active" href="#"> {{ i }} </a>
+        {% else %}
+                <a class="main__paginator" href="?page={{ i }}"> {{ i }} </a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+            <a class="paginator__right" href="?page={{ page_obj.next_page_number }}" aria-label="Next"> Вперед </a>
+    {% else %}
+            <a class="paginator__right" href="#" aria-label="Next"> Вперед </a>
+    {% endif %}
+{% endif %}
+    </nav>
+</td></tr>
+</table>
+</ul>
 {% endblock %}

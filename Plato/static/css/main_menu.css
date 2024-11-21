@@ -1,0 +1,31 @@
+div {
+  justify-content: flex-end;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  margin-top: 0px;
+}
+
+.main_menu a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px #BDBDBD;
+  border-radius: 5px;
+  color: #3205F3;
+  width: 140px;
+  height: 40px;
+  text-decoration: none;
+}
+
+.main_menu .active {
+  background-color: rgba(0, 0, 184, 0.1);
+  border-radius: 5px;
+}
+.main_menu .active a {
+  border-color: #3205F3;
+}
+
+.main_menu a:hover {
+  border: solid 1px #3205F3;
+}
